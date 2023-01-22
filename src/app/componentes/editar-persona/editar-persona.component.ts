@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import { FormGroup,FormBuilder } from '@angular/forms';
 import { PersonaService } from 'src/app/servicio/persona.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-persona',
@@ -46,8 +47,21 @@ export class EditarPersonaComponent {
    enviarDatos():any{
     console.log(this.ID);
     console.log(this.formularioPersonas.value);
-    this.personaService.EditarPersona(this.ID,this.formularioPersonas.value).subscribe(()=>{
-    this.ruteador.navigateByUrl('/listar-persona');
-    });
+    this.personaService.EditarPersona(this.ID,this.formularioPersonas.value).subscribe((respuesta)=>{
+      console.log(respuesta);
+      Swal.fire(
+        'Mantenedor de Personas',
+        respuesta.descripcion,
+        'success'
+      );
+
+      this.ruteador.navigateByUrl('/listar-persona');
+    }, err => {
+      Swal.fire(
+        'Mantenedor de Personas',
+        err.error,
+        'error'
+      );
+  });
   }
 }

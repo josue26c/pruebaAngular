@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder } from '@angular/forms';
 import { PersonaService } from 'src/app/servicio/persona.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-agregar-persona',
@@ -33,8 +34,20 @@ export class AgregarPersonaComponent implements OnInit{
     formData.append('Edad', this.formularioPersonas.get('Edad')!.value);
     formData.append('Apellido', this.formularioPersonas.get('Apellido')!.value);
         
-    this.personaService.AgregarPersona(formData).subscribe(()=>{
+    this.personaService.AgregarPersona(formData).subscribe((respuesta)=>{
+      console.log(respuesta);
+      Swal.fire(
+        'Mantenedor de Personas',
+        respuesta.descripcion,
+        'success'
+      );
       this.ruteador.navigateByUrl('/listar-persona');
-      });
+      }, err => {
+        Swal.fire(
+          'Mantenedor de Personas',
+          err.error,
+          'error'
+        );
+    });
   }
 }
