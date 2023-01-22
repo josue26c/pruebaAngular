@@ -1,0 +1,35 @@
+<div class="card">
+    <div class="card-header">
+        Agregar persona
+    </div>
+    <div class="card-body">
+        <form ngNativeValidate [formGroup]="formularioPersonas" (ngSubmit)="enviarDatos()" >            
+            <div class="row">               
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Nombre">Nombre</label>
+                        <input required type="text" formControlName="Nombre" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Apellido">Apellido</label>
+                        <input required type="text" formControlName="Apellido" id="Apellido" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="Edad">Edad</label>
+                        <input required type="number" formControlName="Edad" id="Edad" class="form-control" />
+                    </div>
+                </div>                
+            </div>            
+            <div class="form-group">
+                <button id="btnguardar" class="btn btn-success btn-block" type="submit">Guardar</button>
+                <button routerLink="/listar-persona/" class="btn btn-primary btn-block" type="button">Cancelar</button>
+            </div>
+        </form>
+    </div>   
+</div>
